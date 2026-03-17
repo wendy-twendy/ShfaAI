@@ -1,0 +1,280 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Security Operations Dashboard — Dark-first
+ * Domain: prompt injection defense pipeline control
+ * Palette: deep slate surfaces, terminal green (safe/active),
+ *          amber (flagged/warning), crimson (blocked/threat)
+ * Depth: borders-only — terminal-like, defined by edges not lift
+ * Typography: Geist Variable — technical, precise
+ * Spacing: 4px base
+ */
+
+:root {
+    /* Light mode fallback (rarely used — dark-first app) */
+    --background: oklch(0.97 0.005 260);
+    --foreground: oklch(0.15 0.01 260);
+    --card: oklch(1 0.005 260);
+    --card-foreground: oklch(0.15 0.01 260);
+    --popover: oklch(1 0.005 260);
+    --popover-foreground: oklch(0.15 0.01 260);
+    --primary: oklch(0.45 0.18 155);
+    --primary-foreground: oklch(0.98 0 0);
+    --secondary: oklch(0.93 0.005 260);
+    --secondary-foreground: oklch(0.15 0.01 260);
+    --muted: oklch(0.93 0.005 260);
+    --muted-foreground: oklch(0.45 0.01 260);
+    --accent: oklch(0.93 0.005 260);
+    --accent-foreground: oklch(0.15 0.01 260);
+    --destructive: oklch(0.55 0.22 25);
+    --border: oklch(0 0 0 / 10%);
+    --input: oklch(0 0 0 / 10%);
+    --ring: oklch(0.45 0.18 155);
+    --radius: 0.5rem;
+
+    /* Security semantic colors */
+    --threat: oklch(0.55 0.22 25);
+    --warning: oklch(0.75 0.15 70);
+    --safe: oklch(0.45 0.18 155);
+    --scanning: oklch(0.6 0.15 260);
+
+    --sidebar: oklch(0.97 0.005 260);
+    --sidebar-foreground: oklch(0.15 0.01 260);
+    --sidebar-primary: oklch(0.45 0.18 155);
+    --sidebar-primary-foreground: oklch(0.98 0 0);
+    --sidebar-accent: oklch(0.93 0.005 260);
+    --sidebar-accent-foreground: oklch(0.15 0.01 260);
+    --sidebar-border: oklch(0 0 0 / 10%);
+    --sidebar-ring: oklch(0.45 0.18 155);
+}
+
+.dark {
+    /* Deep slate command center — slight blue shift */
+    --background: oklch(0.13 0.01 260);
+    --foreground: oklch(0.93 0.005 260);
+
+    /* Elevated surfaces — whisper-quiet shift */
+    --card: oklch(0.17 0.01 260);
+    --card-foreground: oklch(0.93 0.005 260);
+    --popover: oklch(0.19 0.01 260);
+    --popover-foreground: oklch(0.93 0.005 260);
+
+    /* Terminal green — active, enabled, safe */
+    --primary: oklch(0.72 0.19 155);
+    --primary-foreground: oklch(0.13 0.01 260);
+
+    /* Slightly lighter slate for secondary surfaces */
+    --secondary: oklch(0.2 0.01 260);
+    --secondary-foreground: oklch(0.93 0.005 260);
+
+    /* Muted — metadata, disabled, tertiary text */
+    --muted: oklch(0.2 0.01 260);
+    --muted-foreground: oklch(0.55 0.01 260);
+
+    /* Accent — hover states, subtle emphasis */
+    --accent: oklch(0.22 0.01 260);
+    --accent-foreground: oklch(0.93 0.005 260);
+
+    /* Crimson — threats, blocked, dropped */
+    --destructive: oklch(0.65 0.2 25);
+
+    /* Borders: low-opacity white — edges not lift */
+    --border: oklch(1 0 0 / 8%);
+    --input: oklch(1 0 0 / 12%);
+    --ring: oklch(0.72 0.19 155);
+
+    /* Security semantic colors */
+    --threat: oklch(0.65 0.2 25);
+    --warning: oklch(0.78 0.14 70);
+    --safe: oklch(0.72 0.19 155);
+    --scanning: oklch(0.65 0.15 260);
+
+    /* Chart colors — security palette */
+    --chart-1: oklch(0.72 0.19 155);
+    --chart-2: oklch(0.78 0.14 70);
+    --chart-3: oklch(0.65 0.2 25);
+    --chart-4: oklch(0.65 0.15 260);
+    --chart-5: oklch(0.55 0.01 260);
+
+    /* Sidebar — same background as canvas, border-separated */
+    --sidebar: oklch(0.13 0.01 260);
+    --sidebar-foreground: oklch(0.93 0.005 260);
+    --sidebar-primary: oklch(0.72 0.19 155);
+    --sidebar-primary-foreground: oklch(0.13 0.01 260);
+    --sidebar-accent: oklch(0.18 0.01 260);
+    --sidebar-accent-foreground: oklch(0.93 0.005 260);
+    --sidebar-border: oklch(1 0 0 / 8%);
+    --sidebar-ring: oklch(0.72 0.19 155);
+}
+
+@theme inline {
+    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'GeistMono Variable', ui-monospace, monospace;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* Security semantic colors for Tailwind */
+    --color-threat: var(--threat);
+    --color-warning: var(--warning);
+    --color-safe: var(--safe);
+    --color-scanning: var(--scanning);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    html {
+        @apply font-sans;
+    }
+}
+
+/* Markdown prose styles for assistant chat messages */
+.prose {
+    color: var(--foreground);
+    line-height: 1.6;
+}
+.prose > *:first-child {
+    margin-top: 0;
+}
+.prose > *:last-child {
+    margin-bottom: 0;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+    color: var(--foreground);
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+.prose h1 { font-size: 1.25em; }
+.prose h2 { font-size: 1.15em; }
+.prose h3 { font-size: 1.05em; }
+.prose h4 { font-size: 1em; }
+.prose p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.prose strong {
+    color: var(--foreground);
+    font-weight: 600;
+}
+.prose ul, .prose ol {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding-left: 1.5em;
+}
+.prose ul {
+    list-style-type: disc;
+}
+.prose ol {
+    list-style-type: decimal;
+}
+.prose li {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+.prose li::marker {
+    color: var(--muted-foreground);
+}
+.prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--muted);
+    padding: 0.15em 0.35em;
+    border-radius: 0.25em;
+}
+.prose pre {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 0.375em;
+    padding: 0.75em 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    overflow-x: auto;
+}
+.prose pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85em;
+}
+.prose blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: 0.75em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: var(--muted-foreground);
+}
+.prose a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.prose a:hover {
+    opacity: 0.8;
+}
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+}
+.prose th, .prose td {
+    border: 1px solid var(--border);
+    padding: 0.4em 0.75em;
+    text-align: left;
+}
+.prose th {
+    background: var(--muted);
+    font-weight: 600;
+}
+.prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1em 0;
+}
